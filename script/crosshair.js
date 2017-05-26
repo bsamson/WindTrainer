@@ -158,7 +158,7 @@ Crosshair.prototype = function(){
         ctx.font = "bold 16px Arial";
         ctx.textAlign = 'center';
         if( settings.data.Units === "m"){
-            ctx.fillText( Math.round((windSpeed * 0.45) * 10) / 10 + " м/с", circleCentreX,circleCentreY-50 );
+            ctx.fillText( Math.round((windSpeed * 0.45) * 10) / 10 + " m/s", circleCentreX,circleCentreY-50 );
         }else{
             ctx.fillText( windSpeed + " mph", circleCentreX,circleCentreY-50 );
         }
