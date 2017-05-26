@@ -199,6 +199,57 @@ function getCrossHairData(id) {
         }
     );
 
+    data.push(
+        {
+            id: "moa2",
+            opacity: 0.8,
+            thickPost : {
+                display: false,
+                lineThickness:0.8,
+                endPostAngle: 90, // 90 is no angled end.
+                horizontal : {
+                    distanceMoA: 17.19
+                },
+                vertical : {
+                    displayTop: false,
+                    displayBottom: false,
+                    distanceMoA: 17.19
+                }
+            },
+            thinLine : {
+                lineThickness : 0.075
+            },
+            horizontalPoints: [
+                { distanceMoA: -2, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -4, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -6, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -8, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -10, style: 'line', length: 4, width: 0.075 },
+                { distanceMoA: 2, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 4, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 6, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 8, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 10, style: 'line', length: 4, width: 0.075 },
+            ],
+            verticalPoints: [
+                { distanceMoA: -2, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -4, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -6, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -8, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -10, style: 'line', length: 4, width: 0.075 },
+                { distanceMoA: -12, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -14, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -16, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -18, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: -20, style: 'line', length: 4, width: 0.075 },
+                { distanceMoA: 2, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 4, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 6, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 8, style: 'line', length: 2, width: 0.075 },
+                { distanceMoA: 10, style: 'line', length: 4, width: 0.075 }
+            ]
+        }
+    );
 
 
     return findById(data,id);

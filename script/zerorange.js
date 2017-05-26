@@ -69,7 +69,7 @@ ZeroRange.prototype = function(){
         target.drawTarget( range, self.currentTarget, 0, settings.data.ScopeMag );
 
         crosshair.displayRange(range);
-        crosshair.displayWindDirection( self.Wind.Speed, calcWindVector(self.Wind.Direction,self.zeroRangeAngle) );
+        crosshair.displayWindDirection( self.Wind.Speed, calcWindVector(self.Wind.Direction,self.zeroRangeAngle), settings.data.Units );
 
         _takeAim.call(self);
     };
