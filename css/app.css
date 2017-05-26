@@ -1,0 +1,85 @@
+body {
+    background-color: black;
+}
+
+#settingsForm {
+    background-color: #FFFFFF;
+}
+
+#settings {
+    display: none;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 600px;
+    height: 600px;
+    margin:10px;
+    background-color: white;
+}
+
+#shoot-menu {
+    display: none;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 600px;
+    height: 600px;
+    margin:10px;
+    background-color: white;
+}
+
+#zero-range {
+    display: none;
+    position: absolute;
+    top:0px;
+    left: 600px;
+    width: 400px;
+    height: 600px;
+    margin-top: 20px;
+    padding-right: 15px;
+}
+
+#scorecard {
+    position: absolute;
+    background-color: #000000;
+    top:0px;
+    left: 600px;
+    width: 400px;
+    height: 600px;
+}
+/*
+#ganecontrol {
+    position: absolute;
+    background-color: #000000;
+    top:500px;
+    left: 600px;
+    width: 400px;
+    height: 100px;
+    padding-right: 30px;
+    cursor: default;
+}
+*/
+#btnCourseQuit {
+    display: none;
+}
+
+#googleadd {
+    position: absolute;
+    top: 0;
+    left: 600px;
+    width: 170px;
+    height: 600px;
+    padding-left: 10px;
+    background-color: black;
+}
+
+#googleaddingame {
+    position: absolute;
+    top: 600px;
+    left: 0px;
+    width: 1000px;
+    height: 100px;
+    padding-top: 5px;
+    padding-left: 150px;
+    background-color: black;
+}

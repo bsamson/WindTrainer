@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Field Target Wind Trainer</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="Field Target wind simulation game" />
+    <meta property="og:site_name" content="COMPETITIONSHOOTER.CO.UK" />
+    <meta property="og:url " content="www.competitionshooter.co.uk/windeeze" />
+    <meta property="og:description" content="If you knew the wind speed and direction for every shot, would you be able to clear the course?" />
+    <meta property="og:image" content="windeeze.jpg" />
+    <meta property="article:author" content="https://www.facebook.com/briandsamson" />
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" />
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css" media="screen" />
+    <link rel="stylesheet" href="css/app.css?ver=20140609" media="screen" />
+    <script type="text/javascript" src="script/utils.js?ver=20140609"></script>
+    <script type="text/javascript" src="script/sizzle.min.js?ver=20140609"></script>
+    <script type="text/javascript" src="script/ballistics-min.js?ver=1"></script>
+    <script type="text/javascript" src="script/courseInfo.js?ver=20140624"></script>
+    <script type="text/javascript" src="script/crosshairdata.js?ver=20140609"></script>
+    <script type="text/javascript" src="script/settings.js?ver=20140704"></script>
+    <script type="text/javascript" src="script/mainmenu.js?ver=20140622"></script>
+    <script type="text/javascript" src="script/zerorange.js?ver=20140704"></script>
+    <script type="text/javascript" src="script/scorecard.js?ver=20140704"></script>
+    <script type="text/javascript" src="script/gamecontrol.js?ver=20140704"></script>
+
+    <script type="text/javascript" src="script/target.js?ver=20140704"></script>
+    <script type="text/javascript" src="script/crosshair.js?ver=20140609"></script>
+    <script type="text/javascript" src="script/app.js?ver=20140609"></script>
+    <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+<body onload="init();">
+<div id="windapp" style="background-color:white;position: absolute; top:0px;left:0px; width:1000px; height: 600px;overflow: hidden;display: none;">
+    <canvas id="target" class="target" width="1200" height="1800" style="position: absolute; top:0px;left:0px;"></canvas>
+    <canvas id="cross" width="600" height="600" style="position: absolute; top:0px;left:0px;cursor: none;"></canvas>
+    <canvas id="scorecard" width="400px" height="500px"></canvas>
+</div>
+
+<div id="settings">
+    <h1 class="text-center">Brian's Field Target Wind Tamer</h1>
+    <form role="form" class="form-horizontal" id="settingsForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Ballistic information</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="txtBC" class="col-sm-4 control-label">Ballistic coefficient :</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" id="txtBC" placeholder="Ballistic coefficient" autofocus min="0.010" max="0.046" step="0.001" required>
+                    </div>
+                    <p class="help-block">BC of JSB Exact .177 is 0.024</p>
+                </div>
+                <div class="form-group">
+                    <label for="txtMV" class="col-sm-4 control-label">Muzzle velocity in fps :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtMV" placeholder="Muzzle velocity in fps" required min="500" max="1100" step="1">
+                    </div>
+                    <p class="help-block">in Feet per second (fps)</p>
+                </div>
+                <div class="form-group">
+                    <label for="txtScopeHeight" class="col-sm-4 control-label">Scope height :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtScopeHeight" placeholder="Scope height in inches" required min="1" max="7" step="0.01">
+                    </div>
+                    <p class="help-block">(inches)</p>
+                </div>
+                <div class="form-group">
+                    <label for="optReticle" class="col-sm-4 control-label">Reticle :</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" id="optReticle" required>
+                            <option value="cross">Cross hairs</option>
+                            <option value="mildot">Mildot reticle</option>
+                            <option value="natoret16">NATO Reticle</option>
+                            <option value="3030ret">30/30 Reticle</option>
+                            <option value="mildotwithhalfwindagelines">Mildot reticle with half mildot windage marks</option>
+                            <option value="marchmtrft">March MTR-FT</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="txtScopeMag" class="col-sm-4 control-label">Scope Mag :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtScopeMag" placeholder="Scope magnification" required min="6" max="60" step="1">
+                    </div>
+                    <p class="help-block">x magnification</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Your shooting ability</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="txtGroupSize" class="col-sm-4 control-label">Average Group Size :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtGroupSize" placeholder="Average edge to edge group size (mm)" required min="5" max="50" step=".1">
+                    </div>
+                    <p class="help-block">average group size edge to edge (mm)</p>
+                </div>
+                <div class="form-group">
+                    <label for="txtGroupDistance" class="col-sm-4 control-label">Group distance :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtGroupDistance" placeholder="Distance the for the average group size (yards)" required min="8" max="55" step="1">
+                    </div>
+                    <p class="help-block">Distance for the average group size (yards)</p>
+                </div>
+                <div class="form-group">
+                    <label for="txtScopeError" class="col-sm-4 control-label">Margin for ranging error :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtScopeError" placeholder="Margin for error in ranging above 50 yards" required min="0" max="5" step=".1">
+                    </div>
+                    <p class="help-block">Margin for error in ranging above 50 yards - (+/- in yards)</p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Course defaults</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="metimp" class="col-sm-4 control-label">Metric / Imperial :</label>
+                    <div class="col-sm-4">
+                        <div class="btn-group" id="metimp">
+                            <button type="button" id="btnImperial" class="btn btn-info active">Yards</button>
+                            <button type="button" id="btnMetric" class="btn btn-default">Metres</button>
+                        </div>
+                    </div>
+                    <p class="help-block">Target distance display</p>
+                </div>
+                <div class="form-group">
+                    <label for="txtFixedWind" class="col-sm-4 control-label">Fixed wind speed (mph) :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtFixedWind" placeholder="mph" min="1" max="20" step="1">
+                    </div>
+                    <p class="help-block">leave blank to accept the course default</p>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg pull-right" id="btnSaveSettings">Continue&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>
+    </form>
+    <div id="googleadd">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:160px;height:600px"
+             data-ad-client="ca-pub-0586552287426207"
+             data-ad-slot="6014060246"></ins>
+    </div>
+</div>
+
+<div id="shoot-menu">
+    <h1 class="text-center">Brian's Field Target Wind Tamer</h1>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Please select a course :</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="list-group">
+                <a href="#" class="list-group-item" id="yorkWinterLeagueCourse">
+                    <h4 class="list-group-item-heading">York Winter League <span class="badge pull-right alert-info">&nbsp;</span></h4>
+                    <p class="list-group-item-text">30 target course with straight firing line. (wind speed 3-5mph)</p>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item" id="inters2014">
+                    <h4 class="list-group-item-heading">2014 Inter-Regional course <span class="badge pull-right alert-info">&nbsp;</span></h4>
+                    <p class="list-group-item-text">The 40 target course at Redfearns FTC used for the Inter regional competition on 6th April, 2014 </p>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item" id="mendip2014">
+                    <h4 class="list-group-item-heading">SWEFTA League 4 (Mendip) <span class="badge pull-right alert-info">&nbsp;</span></h4>
+                    <p class="list-group-item-text">40 target course with some non-standard kills, shot on 25th May, 2014</p>
+                    <span class="col-sm-2 pull-right">&nbsp;</span>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item" id="tecnotargetopen2014">
+                    <h4 class="list-group-item-heading">Spanish TecnoTargets Open May, 2014 <span class="badge pull-right alert-info">&nbsp;</span></h4>
+                    <p class="list-group-item-text">52 target promotional course by TecnoTargets, Spain</p>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item" id="643FT">
+                    <h4 class="list-group-item-heading">643FT Club course - New Zealand<span class="badge pull-right alert-info">&nbsp;</span></h4>
+                    <p class="list-group-item-text">20 target sample club level course, New Zealand</p>
+                </a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item" id="Shebbear">
+                    <h4 class="list-group-item-heading">Shebbear club course<span class="badge pull-right alert-info">&nbsp;</span></h4>
+                    <p class="list-group-item-text">40 target SWEFTA club course. AKA Windy Ridge</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="zero-range">
+    <div class="alert alert-info">
+        <p>Get some practice in on the zero range to give you an idea about what sort of effect the wind will have at different ranges.</p>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pick a target board to practice on :</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-6"><button id="btnZero55" type="button" class="btn btn-success btn-lg">55 yards</button></div>
+                <div class="col-md-6"><button id="btnZero50" type="button" class="btn btn-success btn-lg">50 yards</button></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6"><button id="btnZero45" type="button" class="btn btn-success btn-lg center-block">45 yards</button></div>
+                <div class="col-md-6"><button id="btnZero40" type="button" class="btn btn-success btn-lg center-block">40 yards</button></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6"><button id="btnZero35" type="button" class="btn btn-success btn-lg">35 yards</button></div>
+                <div class="col-md-6"><button id="btnZero30" type="button" class="btn btn-success btn-lg">30 yards</button></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6"><button id="btnZero25" type="button" class="btn btn-success btn-lg center-block">25 yards</button></div>
+                <div class="col-md-6"><button id="btnZero20" type="button" class="btn btn-success btn-lg center-block">20 yards</button></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-6"><button id="btnZero15" type="button" class="btn btn-success btn-lg">15 yards</button></div>
+                <div class="col-md-6"><button id="btnZero10" type="button" class="btn btn-success btn-lg">10 yards</button></div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <button id="btnZeroQuit" type="button" class="btn btn-info btn-lg pull-left">Quit</button>
+        <button id="btnZeroShoot" type="button" class="btn btn-primary btn-lg pull-right">Shoot the course&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>
+    </p>
+
+</div>
+
+<!-- Windeeze Page -->
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script type="text/javascript" src="script/targets/targets.min.js?ver=20141023"></script>
+
+</body>
+</html>
