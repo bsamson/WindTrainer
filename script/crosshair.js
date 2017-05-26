@@ -131,7 +131,7 @@ Crosshair.prototype = function(){
     };
 
 
-    var _displayWindDirection = function(windSpeed, windVector) {
+    var _displayWindDirection = function(windSpeed, windVector, units ) {
         var self = this;
 
         var ctx = self.ctx;
@@ -157,9 +157,9 @@ Crosshair.prototype = function(){
         ctx.fillStyle = "white";
         ctx.font = "bold 16px Arial";
         ctx.textAlign = 'center';
-        if( settings.data.Units === "m"){
+        if( units === "m"){
             ctx.fillText( Math.round((windSpeed * 0.45) * 10) / 10 + " m/s", circleCentreX,circleCentreY-50 );
-        }else{
+        } else {
             ctx.fillText( windSpeed + " mph", circleCentreX,circleCentreY-50 );
         }
         ctx.restore();

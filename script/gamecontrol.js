@@ -148,8 +148,9 @@ GameControl.prototype = function(){
 
             crosshair.displayRange(self.courseInfo.course[self.currentTargetNumber-1].range);
             crosshair.displayWindDirection( self.courseWind.Speed + self.courseInfo.course[self.currentTargetNumber-1].additionalWind,
-                                            calcWindVector(self.courseWind.Direction,
-                                            self.courseInfo.course[self.currentTargetNumber-1].angle ) );
+                                            calcWindVector(self.courseWind.Direction,self.courseInfo.course[self.currentTargetNumber-1].angle ),
+                                            settings.data.Units
+                                          );
             crosshair.drawComment(self.courseInfo.course[self.currentTargetNumber-1].comment );
 
             _takeAim.call(self);
