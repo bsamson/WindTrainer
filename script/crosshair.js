@@ -74,7 +74,7 @@ Crosshair.prototype = function(){
 
             var shotxpos = parseInt(target.canvas.style.left,10);
 
-            self.tracking = false;
+            self.tracking = true;
 
             var originalTop = parseInt(target.canvas.style.top,10);
             target.canvas.style.top = originalTop+5 + "px";
