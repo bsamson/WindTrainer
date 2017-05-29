@@ -275,6 +275,11 @@ EstorninoTarget.prototype = function(){
         ctx.closePath();
         ctx.fill();
         ctx.restore();
+        
+        ctx.save(); 
+        ctx.beginPath();
+        ctx.arc(f, g, e * 5, 0, 2 * Math.PI);
+        ctx.stroke();
     };
 
     return {
