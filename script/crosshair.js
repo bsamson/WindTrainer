@@ -18,10 +18,11 @@ Crosshair.prototype = function(){
             self.ctx = self.canvas.getContext("2d");
         }
         self.canvas.addEventListener("touchmove", function(e){  _onCrossTouchMove.call(self,e);}, false);
+        /*
         if(screen.width > 1100){
             self.canvas.addEventListener('mousemove', function(e) {  _onCrossMouseMove.call(self,e);},false);
             self.canvas.addEventListener('click', function(e) { _onShotTaken.call(self,e);},false );
-        }
+        }*/
         document.getElementById("mobfire").addEventListener('click', function(e) { _onShotTaken.call(self,e);},false );
     };
 
