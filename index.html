@@ -122,29 +122,36 @@
                 </div>
             </div>
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Course defaults</h3>
+            <div class="panel-heading">
+                <h3 class="panel-title">Course defaults</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="metimp" class="col-sm-4 control-label">Metric / Imperial :</label>
+                    <div class="col-sm-4">
+                        <div class="btn-group" id="metimp">
+                            <button type="button" id="btnImperial" class="btn btn-info active">Yards</button>
+                            <button type="button" id="btnMetric" class="btn btn-default">Metres</button>
+                        </div>
+                    </div>
+                    <p class="help-block">Target distance display</p>
                 </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <label for="metimp" class="col-sm-4 control-label">Metric / Imperial :</label>
-                        <div class="col-sm-4">
-                            <div class="btn-group" id="metimp">
-                                <button type="button" id="btnImperial" class="btn btn-info active">Yards</button>
-                                <button type="button" id="btnMetric" class="btn btn-default">Metres</button>
-                            </div>
-                        </div>
-                        <p class="help-block">Target distance display</p>
+                <div class="form-group">
+                    <label for="txtKnockDelay" class="col-sm-4 control-label">Knockout delay (s):</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtKnockDelay" placeholder="s" min="1" max="20" step="1">
                     </div>
-                    <div class="form-group">
-                        <label for="txtFixedWind" class="col-sm-4 control-label">Fixed wind speed (mph) :</label>
-                        <div class="col-sm-2">
-                            <input type="number" class="form-control" id="txtFixedWind" placeholder="mph" min="1" max="20" step="1">
-                        </div>
-                        <p class="help-block">leave blank to accept the course default</p>
+                    <p class="help-block">leave blank to disable delay</p>
+                </div>
+                <div class="form-group">
+                    <label for="txtFixedWind" class="col-sm-4 control-label">Fixed wind speed (mph) :</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" id="txtFixedWind" placeholder="mph" min="1" max="20" step="1">
                     </div>
+                    <p class="help-block">leave blank to accept the course default</p>
                 </div>
             </div>
+        </div>
 
             <button type="submit" class="btn btn-primary btn-lg pull-right" id="btnSaveSettings">Continue&nbsp;<i class="glyphicon glyphicon-chevron-right"></i></button>
         </form>

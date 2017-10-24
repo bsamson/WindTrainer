@@ -14,7 +14,8 @@ var Settings = function() {
         ScopeErrorAt55 : 2,
         CrossHair: "mildot",
         Units: "y",
-        ScopeMag: 16
+        ScopeMag: 16,
+        KnockDelay: 0
     };
 
     self.FixedWind = 0;
@@ -99,6 +100,9 @@ Settings.prototype = function () {
 
         var txtFixedWind = document.getElementById("txtFixedWind");
         txtFixedWind.value = self.FixedWind > 0 ? self.FixedWind : "";
+        
+        var txtKnockDelay = document.getElementById("txtKnockDelay");
+        txtKnockDelay.value = self.data.KnockDelay > 0 ? self.data.KnockDelay : "";
 
         if( self.data.Units === "m" ) {
             document.getElementById("btnMetric").className = "btn btn-info active";
@@ -143,6 +147,9 @@ Settings.prototype = function () {
 
         var txtFixedWind = document.getElementById("txtFixedWind");
         self.FixedWind = txtFixedWind.value !== ""?parseFloat(txtFixedWind.value):0;
+        
+        var txtKnockDelay = document.getElementById("txtKnockDelay");
+        self.data.KnockDelay = txtKnockDelay.value !== ""?parseFloat(txtKnockDelay.value):0;
 
         self.crossHairData = getCrossHairData(self.data.CrossHair);
 

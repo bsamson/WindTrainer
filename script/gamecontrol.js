@@ -185,7 +185,7 @@ GameControl.prototype = function(){
                 target.knockover();
                 scorecard.markTarget(self.currentTargetNumber,true);
                 scorecard.setScore(++self.score);
-            },400);
+            },400+1000*settings.data.KnockDelay);
         } else if ( pelletStrikeRadius < (self.courseInfo.course[self.currentTargetNumber-1].killzone + 4)/2 ) {
             scorecard.message("-- SPLIT --");
             scorecard.markTarget(self.currentTargetNumber,false);
@@ -196,7 +196,7 @@ GameControl.prototype = function(){
 
         setTimeout(function(){
             _getNextTarget.call(self);
-        },2000);
+        },2000+1000*settings.data.KnockDelay);
     };
 
 
